@@ -4,9 +4,11 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.ts",
+  devtool: "inline-source-map",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
+    assetModuleFilename: "assets/[hash][ext][query]",
   },
   resolve: {
     extensions: [".ts", ".js"],
@@ -26,6 +28,10 @@ module.exports = {
         use: {
           loader: "ts-loader",
         },
+      },
+      {
+        test: /\.(svg|png|jpg)?$/,
+        type: "asset/resource",
       },
     ],
   },
