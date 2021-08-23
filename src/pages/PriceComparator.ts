@@ -13,7 +13,7 @@ const PriceComparator = () => {
     id: string;
     img: string;
     icon: string;
-    platformprice: number;
+    plans: { plan: string; price: number }[];
   }[] = data;
 
   // variable to store the form values

@@ -33,6 +33,12 @@ body {
   color: white;
 }
 
+.currency-type {
+  font-size: 1.6rem;
+  text-align: center;
+  color: white;
+}
+
 .streaming-platforms-buttons {
   width: 100%;
   max-width: 225px;

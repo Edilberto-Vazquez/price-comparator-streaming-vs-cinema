@@ -11,25 +11,35 @@ const platforms: {
   id: string;
   img: string;
   icon: string;
-  platformprice: number;
+  plans: { plan: string; price: number }[];
 }[] = [
   {
     id: "amazon",
     img: amazonImage,
     icon: amazonIcon,
-    platformprice: 99,
+    plans: [
+      { plan: "Mensual", price: 75 },
+      { plan: "Anual", price: 899 },
+    ],
   },
   {
     id: "netflix",
     img: netflixImage,
     icon: netflixIcon,
-    platformprice: 139,
+    plans: [
+      { plan: "Básico", price: 139 },
+      { plan: "Estándar", price: 196 },
+      { plan: "Premium", price: 266 },
+    ],
   },
   {
     id: "disney",
     img: disneyImage,
     icon: disneyIcon,
-    platformprice: 159,
+    plans: [
+      { plan: "Mensual", price: 159 },
+      { plan: "Anual", price: 1599 },
+    ],
   },
 ];
 

@@ -1,7 +1,7 @@
 interface Properties {
   id: string;
   img: string;
-  platformprice: number;
+  plans: { plan: string; price: number }[];
   cinemaprice: number;
 }
 
@@ -36,8 +36,8 @@ class StreamingPlatformCard extends HTMLElement {
         }
         :host {
           width: 100%;
-          max-width: 700px;
-          height: 100%;
+          max-width: 450px;
+          height: 380px;
           display: grid;
           animation: fade 0.4s linear;
         }
@@ -47,7 +47,7 @@ class StreamingPlatformCard extends HTMLElement {
           padding: 24px 24px;
           display: grid;
           grid-auto-rows: min-content;
-          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          place-items: center;
           gap: 14px;
           border-radius: 10px;
           background: #040714;
@@ -80,19 +80,14 @@ class StreamingPlatformCard extends HTMLElement {
     const template: HTMLTemplateElement = document.createElement("template");
     template.innerHTML = `
       <article class="streaming-platform-card">
-        <img
-          src=${this.properties.img}
-          alt="streaming platform"
-          class="streaming-platform-card__image">
+        <img src=${
+          this.properties.img
+        } alt="streaming platform" class="streaming-platform-card__image" />
         <div class="streaming-platform-card__description">
-          <span>Costo mensual de la suscripción: ${
-            this.properties.platformprice
-          } </span>
-          <span>Costo mensual del cine: ${this.properties.cinemaprice} </span>
-          <span>${this.priceComparator(
-            this.properties.platformprice,
-            this.properties.cinemaprice
-          )}
+        <span>Costo mensual del cine: ${this.formatPrice(
+          this.properties.cinemaprice
+        )} </span>
+          ${this.priceComparator(this.properties.plans)}
         </div>
         </span>
       </article>
@@ -101,17 +96,37 @@ class StreamingPlatformCard extends HTMLElement {
     return template;
   }
 
-  protected priceComparator(
-    platformprice: number,
-    cinemaprice: number
-  ): string {
-    if (platformprice > cinemaprice) {
-      return "Es más barato ir al cine";
-    } else if (platformprice < cinemaprice) {
-      return "Es más barato pagar la suscripción";
-    } else {
-      return "valen lo mismo";
-    }
+  protected priceComparator(plans: any): any {
+    const plansList = plans
+      .map((plan: any) => {
+        const annualPriceCiname: number = this.properties.cinemaprice * 12;
+        if (plan.plan === "Anual") {
+          return `<span>Plan ${plan.plan}: ${this.formatPrice(
+            plan.price
+          )} ${this.saveMoney(plan.price, annualPriceCiname)}</span>`;
+        } else if (plan.plan !== "Anual") {
+          return `<span>Plan ${plan.plan}: ${this.formatPrice(
+            plan.price
+          )} ${this.saveMoney(plan.price, this.properties.cinemaprice)}</span>`;
+        }
+      })
+      .join("");
+    return plansList;
+  }
+
+  protected saveMoney(planPrice: number, cinemaPrice: number) {
+    return planPrice < cinemaPrice
+      ? `ahorras: ${this.formatPrice(Math.abs(planPrice - cinemaPrice))}`
+      : `pierdes: ${this.formatPrice(Math.abs(planPrice - cinemaPrice))}`;
+  }
+
+  protected formatPrice(price: number): string {
+    const newPice = new window.Intl.NumberFormat("en-EN", {
+      style: "currency",
+      currency: "MXN",
+    }).format(price);
+
+    return newPice;
   }
 
   protected render(): void {
