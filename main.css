@@ -1,0 +1,74 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Roboto", sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: auto;
+  background: #0f171e;
+}
+
+#app {
+  width: 100%;
+  height: auto;
+  padding: 14px 10px;
+  display: grid;
+  place-items: center;
+  grid-auto-rows: min-content;
+  row-gap: 14px;
+  background: #0f171e;
+}
+
+.page-title {
+  font-size: 2.4rem;
+  text-align: center;
+  color: white;
+}
+
+.currency-type {
+  font-size: 1.6rem;
+  text-align: center;
+  color: white;
+}
+
+.streaming-platforms-buttons {
+  width: 100%;
+  max-width: 225px;
+  height: auto;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+}
+
+.streaming-platforms-cards {
+  width: 100%;
+  height: auto;
+  display: grid;
+  place-items: center;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.on-load {
+  animation: fade 0.4s linear;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
