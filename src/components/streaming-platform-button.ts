@@ -50,9 +50,17 @@ class StreamingPlatformButton extends HTMLElement {
     return `
       <style>
         :host {
-          width: 50px;
-          height: 50px;
+          width: 75px;
+          height: 75px;
           display: grid;
+        }
+        .img-wrapper{
+          width: 75px;
+          height: 75px;
+        }
+        .img-wrapper__img{
+          width: 100%;
+          height: auto;
         }
       </style>
     `;
@@ -61,8 +69,8 @@ class StreamingPlatformButton extends HTMLElement {
   protected getTemplete(): HTMLTemplateElement {
     const templete = document.createElement("template");
     templete.innerHTML = `
-      <div>
-        <img src=${this.image} alt=${this.name}>
+      <div class="img-wrapper">
+        <img class="img-wrapper__img" src=${this.image} alt=${this.name}>
       </div>
       ${this.getStyles()}
     `;

@@ -6,51 +6,63 @@
 
 html {
   font-size: 62.5%;
+  font-family: "Roboto", sans-serif;
 }
 
+html,
 body {
-  display: grid;
-  justify-items: center;
+  width: 100%;
+  height: auto;
+  background: #0f171e;
 }
 
-#root {
-  max-width: 800px;
+#app {
+  width: 100%;
+  height: auto;
+  padding: 14px 10px;
   display: grid;
+  place-items: center;
   grid-auto-rows: min-content;
-}
-
-.movies-form {
-  padding: 0 14px;
-  display: grid;
-}
-
-.movies-form label {
-  display: grid;
-  font-size: 1.8rem;
-}
-
-.streaming-platforms {
-  max-width: 700px;
-  padding: 0 14px;
-  display: grid;
-  grid-auto-rows: 1fr;
   row-gap: 14px;
+  background: #0f171e;
 }
 
-/* @media (min-width: 840px) {
-  #root {
-    grid-template-rows: 100px auto;
-    grid-template-columns: 2fr 8fr;
+.page-title {
+  font-size: 2.4rem;
+  text-align: center;
+  color: white;
+}
+
+.streaming-platforms-buttons {
+  width: 100%;
+  max-width: 225px;
+  height: auto;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+}
+
+.streaming-platforms-cards {
+  width: 100%;
+  height: auto;
+  display: grid;
+  place-items: center;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.on-load {
+  animation: fade 0.4s linear;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
   }
-  #root .movies-form:nth-child(1) {
-    grid-column: 1/3;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  #root streaming-platform-list:nth-child(1) {
-    grid-column: 1/2;
-    grid-row: 2/3;
-  }
-  #root .streaming-platform:nth-child(1) {
-    grid-column: 2/3;
-    grid-row: 2/3;
-  }
-} */
+}

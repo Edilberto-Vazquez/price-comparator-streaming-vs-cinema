@@ -37,20 +37,20 @@ class StreamingPlatformCard extends HTMLElement {
         :host {
           width: 100%;
           max-width: 700px;
-          height: auto;
+          height: 100%;
           display: grid;
           animation: fade 0.4s linear;
         }
         .streaming-platform-card {
           width: 100%;
-          height: auto;
+          height: 100%;
           padding: 24px 24px;
           display: grid;
-          grid-auto-rows: 1fr;
+          grid-auto-rows: min-content;
           grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
           gap: 14px;
           border-radius: 10px;
-          background: #0f171e;
+          background: #040714;
         }
         .streaming-platform-card__image {
           width: 100%;
@@ -120,7 +120,7 @@ class StreamingPlatformCard extends HTMLElement {
   }
 
   protected onDomChanged(mutations: MutationRecord[]): void {
-    if (!this.shadowRoot) {
+    if (mutations) {
       return;
     }
   }
@@ -132,6 +132,9 @@ class StreamingPlatformCard extends HTMLElement {
       subtree: true,
       childList: true,
     });
+    while (this.shadowRoot?.firstChild) {
+      this.shadowRoot?.removeChild(this.shadowRoot?.firstChild);
+    }
     this.render();
   }
 
